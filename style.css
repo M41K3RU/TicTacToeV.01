@@ -34,3 +34,7 @@ h1 {
 .border-r {
     border-right: 10px solid black;
 }
+
+.winner {
+    color: red;
+}
