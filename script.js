@@ -31,7 +31,7 @@ function TicTacToeGame() {
 
 function Board() {
     this.positions = Array.from(document.querySelectorAll('.col'));
-    // console.log(this.positions);
+    console.log(this.positions);
 
 }
 
@@ -50,7 +50,9 @@ function Player1(board) {
 
 function Player2(board) {
     this.takeTurn = function () {
-
+        const availablePositions = board.positions.filter((p) => p.innerText === '');
+        const move = Math.floor(Math.random() * availablePositions.length);
+        availablePositions[move].innerText = 'O';
         console.log("Player2 turn");
     }
 }
