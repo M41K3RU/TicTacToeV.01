@@ -3,8 +3,8 @@ ticTacToeGame.start();
 
 function TicTacToeGame() {
     const board = new Board();
-    const player1 = new Player1();
-    const player2 = new Player2();
+    const player1 = new Player1(board);
+    const player2 = new Player2(board);
     let turn = 0;
 
     this.start = function () {
@@ -13,14 +13,44 @@ function TicTacToeGame() {
         };
         const observer = new MutationObserver(() => takeTurn());
         board.positions.forEach((element) => observer.observe(element, config));
+        takeTurn();
     }
 
     function takeTurn() {
-        console.log("It works");
+        // console.log("It works");
+
+        if (turn % 2 === 0) {
+            player1.takeTurn();
+        } else {
+            player2.takeTurn();
+        }
+
+        turn++;
     }
 }
 
 function Board() {
     this.positions = Array.from(document.querySelectorAll('.col'));
-    console.log(this.positions);
+    // console.log(this.positions);
+
+}
+
+function Player1(board) {
+    this.takeTurn = function () {
+        board.positions.forEach(element => element.addEventListener('click', handleTurnTaken));
+        console.log("Player1 turn");
+    }
+
+    function handleTurnTaken(event) {
+        event.target.innerText = 'X';
+        board.positions.forEach(element => element.removeEventListener('click', handleTurnTaken));
+        // console.log("turn taken");
+    }
+}
+
+function Player2(board) {
+    this.takeTurn = function () {
+
+        console.log("Player2 turn");
+    }
 }
