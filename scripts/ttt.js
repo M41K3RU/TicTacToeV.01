@@ -1,3 +1,4 @@
+const btnReset = document.querySelector('.reset');
 const ticTacToeGame = new TicTacToeGame();
 ticTacToeGame.start();
 
@@ -64,13 +65,14 @@ function Board() {
 }
 
 function Player1(board) {
+    let availablePositions = board.positions.filter((p) => p.innerText === '');
     this.takeTurn = function () {
-        board.positions.forEach(element => element.addEventListener('click', handleTurnTaken));
+        availablePositions.forEach(element => element.addEventListener('click', handleTurnTaken));
         console.log("Player1 turn");
     }
 
-    function handleTurnTaken(event) {
-        event.target.innerText = 'X';
+    function handleTurnTaken(availablePositions) {
+        availablePositions.target.innerText = 'X';
         board.positions.forEach(element => element.removeEventListener('click', handleTurnTaken));
         // console.log("turn taken");
     }
@@ -84,3 +86,9 @@ function Player2(board) {
         console.log("Player2 turn");
     }
 }
+
+function reset() {
+    location.reload();
+}
+
+btnReset.addEventListener('click', reset);
